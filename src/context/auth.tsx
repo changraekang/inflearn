@@ -17,6 +17,8 @@ const DispatchContext = createContext<any>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <StateContext.Provider value={state}>{children}</StateContext.Provider>
+    <DispatchContext.Provider value={dispatch}>
+      <StateContext.Provider value={state}>{children}</StateContext.Provider>
+    </DispatchContext.Provider>
   );
 };
