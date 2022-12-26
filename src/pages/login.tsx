@@ -3,10 +3,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { FormEvent, useState } from "react";
 import InputGroup from "../components/InputGroup";
+import { useAuthDispatch } from "../context/auth";
 const Login = () => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<any>({});
+
+  const dispatch = useAuthDispatch();
 
   let router = useRouter();
 
@@ -25,6 +28,7 @@ const Login = () => {
         }
       );
       console.log(res, "res");
+      dispatch("LOGIN", res.data?.user);
       router.push("/");
     } catch (error: any) {
       setErrors(error.response.data || {});
